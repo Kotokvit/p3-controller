@@ -65,29 +65,94 @@
 
 ## Quick Start
 
-### Install
+### 1. Clone & Setup
 
 ```bash
 git clone https://github.com/Kotokvit/p3-controller.git
 cd p3-controller
-python3 -m pip install -e .
 ```
 
-### Start Controller
+### 2. Create Virtual Environment
+
+**Linux (bash/zsh):**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+**Linux (fish shell — Arch/CachyOS/etc):**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate.fish
+```
+
+**Or run directly without activating (works in any shell):**
+```bash
+# Use .venv/bin/pip and .venv/bin/python3 instead of pip/python3
+```
+
+### 3. Install Dependencies
+
+**If venv is activated:**
+```bash
+pip install tomli_w tomli fastapi uvicorn cryptography aiosqlite httpx typer pydantic docker
+```
+
+**Without activation (any shell):**
+```bash
+.venv/bin/pip install tomli_w tomli fastapi uvicorn cryptography aiosqlite httpx typer pydantic docker
+```
+
+### 4. Run Tests
+
+**If venv is activated:**
+```bash
+PYTHONPATH=. python3 -c "
+import asyncio
+from tests.e2e import run_e2e_test
+from tests.server_test import run_server_test
+print('=== E2E Security Test ===')
+asyncio.run(run_e2e_test())
+print()
+print('=== Server Integration Test ===')
+asyncio.run(run_server_test())
+"
+```
+
+**Without activation:**
+```bash
+PYTHONPATH=. .venv/bin/python3 -c "
+import asyncio
+from tests.e2e import run_e2e_test
+from tests.server_test import run_server_test
+print('=== E2E Security Test ===')
+asyncio.run(run_e2e_test())
+print()
+print('=== Server Integration Test ===')
+asyncio.run(run_server_test())
+"
+```
+
+Expected output: **52/52 PASSED**
+
+### 5. Start Controller
 
 ```bash
+# Activated venv:
 p3 server
-# Starts on https://127.0.0.1:8443
+
+# Without activation:
+.venv/bin/python3 -m p3controller.cli.main server
 ```
 
-### Add GitHub Credential
+### 6. Add GitHub Credential
 
 ```bash
 p3 github add
 # Enter your fine-grained PAT (never shared with agents)
 ```
 
-### Create Agent
+### 7. Create Agent
 
 ```bash
 p3 agent create my-gpu-agent --profile developer
@@ -103,14 +168,14 @@ Run on remote machine:
   p3-agent enroll p3e_xxxxxxxx...
 ```
 
-### On Remote Machine
+### 8. On Remote Machine
 
 ```bash
 p3-agent enroll p3e_xxxxxxxx...
 p3-agent run
 ```
 
-### Manage
+### 9. Manage
 
 ```bash
 p3 agent list
