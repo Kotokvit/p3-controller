@@ -8,8 +8,8 @@ from typing import Optional
 
 import httpx
 
-from ..p3controller.security.crypto import generate_nonce
-from ..p3controller.security.protocol import sign_request, body_sha256
+from p3controller.security.crypto import generate_nonce
+from p3controller.security.protocol import sign_request, body_sha256
 
 
 class AgentProtocol:
@@ -30,7 +30,7 @@ class AgentProtocol:
             body=body,
         )
 
-        from ..p3controller.security.protocol import format_auth_header
+        from p3controller.security.protocol import format_auth_header
         return {
             "Authorization": format_auth_header(signed),
             "Content-Type": "application/json",

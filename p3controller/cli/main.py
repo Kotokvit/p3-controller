@@ -23,9 +23,9 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.prompt import Prompt
 
-from ...config import P3Config
-from ...storage.database import P3Database
-from ...security.crypto import generate_agent_key, parse_agent_key, hash_secret
+from p3controller.config import P3Config
+from p3controller.storage.database import P3Database
+from p3controller.security.crypto import generate_agent_key, parse_agent_key, hash_secret
 
 console = Console()
 app = typer.Typer(name="p3", help="P3 Controller — Secure AI Agent Control Plane")
@@ -198,7 +198,7 @@ def server_start(
 ):
     """Start the P3 Controller server."""
     import uvicorn
-    from ...server.app import create_app
+    from p3controller.server.app import create_app
 
     cfg = P3Config()
     cfg.load()
@@ -220,7 +220,7 @@ def server_start(
 @app.command("test")
 def run_test():
     """Run end-to-end test of Controller + Agent + Warden."""
-    from ...tests.e2e import run_e2e_test
+    from tests.e2e import run_e2e_test
     asyncio.run(run_e2e_test())
 
 

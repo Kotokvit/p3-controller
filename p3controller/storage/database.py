@@ -11,7 +11,7 @@ from typing import Optional
 
 from cryptography.fernet import Fernet
 
-from ..security.crypto import hash_secret, generate_agent_id
+from p3controller.security.crypto import hash_secret, generate_agent_id
 
 
 DB_SCHEMA = """

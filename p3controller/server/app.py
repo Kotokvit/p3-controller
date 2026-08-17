@@ -29,7 +29,7 @@ from fastapi import FastAPI, Request, Response, HTTPException, Depends, Header
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from ..security.crypto import (
+from p3controller.security.crypto import (
     AgentIdentity,
     EnrollmentToken,
     generate_agent_id,
@@ -39,7 +39,7 @@ from ..security.crypto import (
     hash_secret,
     parse_agent_key,
 )
-from ..security.protocol import (
+from p3controller.security.protocol import (
     SignedRequest,
     sign_request,
     verify_request,
@@ -48,11 +48,11 @@ from ..security.protocol import (
     canonical_message,
     format_auth_header,
 )
-from ..security.permissions import Permissions, PROFILES, get_profile
-from ..storage.database import P3Database
-from ..warden.manager import Warden, CellSpec
-from ..github_rel.provider import GitHubCredentialProvider
-from ..config import P3Config
+from p3controller.security.permissions import Permissions, PROFILES, get_profile
+from p3controller.storage.database import P3Database
+from p3controller.warden.manager import Warden, CellSpec
+from p3controller.github_rel.provider import GitHubCredentialProvider
+from p3controller.config import P3Config
 
 
 # ── Pydantic Models ────────────────────────────────────────

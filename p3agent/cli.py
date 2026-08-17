@@ -21,7 +21,7 @@ app = typer.Typer(name="p3-agent", help="P3 Agent — remote agent client")
 @app.command("enroll")
 def enroll(token: str = typer.Argument(..., help="Enrollment token from Controller")):
     """Enroll this agent with P3 Controller using one-time token."""
-    from ..client import P3AgentClient
+    from p3agent.client import P3AgentClient
 
     console.print("[bold]Enrolling agent...[/bold]")
 
@@ -48,7 +48,7 @@ def enroll(token: str = typer.Argument(..., help="Enrollment token from Controll
 @app.command("run")
 def run():
     """Start the agent loop — poll for commands, execute in sandbox."""
-    from ..client import P3AgentClient
+    from p3agent.client import P3AgentClient
 
     agent = P3AgentClient()
     if not agent.load_identity():
@@ -65,7 +65,7 @@ def run():
 @app.command("status")
 def status():
     """Show agent status."""
-    from ..client import P3AgentClient
+    from p3agent.client import P3AgentClient
     from pathlib import Path
     import json
 

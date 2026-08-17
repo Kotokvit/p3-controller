@@ -1,0 +1,22 @@
+[Unit]
+Description=P3 Controller — Secure AI Agent Control Plane
+After=network.target docker.service
+Wants=docker.service
+
+[Service]
+Type=simple
+User=%i
+ExecStart=/usr/local/bin/p3 server --host 127.0.0.1 --port 8443
+Restart=on-failure
+RestartSec=5
+WorkingDirectory=%h/.config/p3-controller
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/.config/p3-controller
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -59,7 +59,7 @@ class P3AgentClient:
         self._ensure_dir()
 
         # Generate identity keypair
-        from ..p3controller.security.crypto import AgentIdentity
+        from p3controller.security.crypto import AgentIdentity
         identity = AgentIdentity.generate("pending")  # ID assigned by controller
 
         # Send enrollment request
@@ -113,7 +113,7 @@ class P3AgentClient:
         with open(self._identity_path) as f:
             data = json.load(f)
 
-        from ..p3controller.security.crypto import AgentIdentity
+        from p3controller.security.crypto import AgentIdentity
         identity = AgentIdentity.from_private_bytes(
             data["agent_id"],
             base64.b64decode(data["private_key_b64"]),
@@ -178,7 +178,7 @@ class P3AgentClient:
 
         # Import warden if not provided
         if warden is None:
-            from ..p3controller.warden.manager import Warden
+            from p3controller.warden.manager import Warden
             warden = Warden()
 
         print(f"P3 Agent {self.protocol.agent_id} running...")
@@ -193,8 +193,8 @@ class P3AgentClient:
 
                 for cmd in commands:
                     # Execute in Docker cell via Warden
-                    from ..p3controller.warden.manager import CellSpec
-                    from ..p3controller.security.permissions import SandboxConfig
+                    from p3controller.warden.manager import CellSpec
+                    from p3controller.security.permissions import SandboxConfig
 
                     spec = CellSpec(
                         agent_id=self.protocol.agent_id,

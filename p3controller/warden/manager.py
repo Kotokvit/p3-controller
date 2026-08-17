@@ -25,7 +25,7 @@ try:
 except ImportError:
     DOCKER_AVAILABLE = False
 
-from ..security.permissions import SandboxConfig
+from p3controller.security.permissions import SandboxConfig
 
 
 @dataclass
