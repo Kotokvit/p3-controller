@@ -1,0 +1,25 @@
+[project]
+name = "p3-controller"
+version = "1.0.0"
+description = "P3 Control Plane — secure AI agent orchestration with credential brokering"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.100",
+    "uvicorn>=0.20",
+    "cryptography>=41.0",
+    "aiosqlite>=0.19",
+    "httpx>=0.24",
+    "typer>=0.9",
+    "pydantic>=2.0",
+    "tomli>=2.0",
+    "tomli_w>=1.0",
+    "docker>=6.0",
+]
+
+[project.scripts]
+p3 = "p3controller.cli.main:app"
+p3-agent = "p3agent.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
