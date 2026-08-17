@@ -266,6 +266,26 @@ Total:            52/52 PASSED
 - Docker (for Warden/sandbox)
 - cryptography, fastapi, uvicorn, aiosqlite, httpx, typer
 
+## Remote Access Tunnel
+
+The Controller runs on localhost:8443. For remote AI agent access:
+
+### Option A: ngrok (quick, 2h idle timeout on free tier)
+```bash
+ngrok http 8443
+```
+
+### Option B: Cloudflare Tunnel (stable, no idle timeout, free forever)
+```bash
+cloudflared tunnel login
+cloudflared tunnel create p3-controller
+cloudflared tunnel route dns p3-controller <your-subdomain>.<yourdomain>.com
+cloudflared tunnel run p3-controller
+```
+
+Current tunnel: `https://retreat-defrost-dripping.ngrok-free.dev`
+
 ## License
 
 MIT
+
